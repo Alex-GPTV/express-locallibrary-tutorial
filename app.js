@@ -16,7 +16,8 @@ var app = express();
 app.use(helmet());
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://Alex-GPTV:86hwag22@cluster0.rjvbe.mongodb.net/local_library?retryWrites=true&w=majority';
+var dev_db_url = 'mongodb+srv://Alex-GPTV:86hwag22@cluster0.rjvbe.mongodb.net/local_library?retryWrites=true&w=majority';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', debug.bind(console, 'MongoDB connection error:'));
